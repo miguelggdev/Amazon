@@ -1,0 +1,32 @@
+<nav>
+    <div class="nav-wrapper blue darken-1">
+      <a href="#" class="brand-logo">Equipo5-GR27</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li class="lime accent-2"><a routerLink="/admin/get">Usuarios</a></li>
+        <li class="green accent-3"><a routerLink="/encomiendas/get">Encomiendas</a></li>
+        <li class=" amber darken-4"><a routerLink="/clientes/get">Clientes</a></li>
+        <li class=" amber darken-4"><a routerLink="/clientes/create">Clientes - crear</a></li>
+        <li class=" amber darken-4"><a routerLink="/servicios/get">Servicios</a></li>
+         <!-- Sesion -->
+      <li *ngIf="!activeSession"><a routerLink="/seguridad/login">Login</a></li>
+      <li *ngIf="activeSession"><a routerLink="/seguridad/logout">Cerrar Sesion</a></li>
+       <!-- <li class="orange darken-3"><a routerLink="/seguridad/login">Login</a></li>-->
+      </ul>
+    </div>
+  </nav>
+
+  <nav>
+    <div class="nav-wrapper amber accent-3">
+      <a href="#" class="brand-logo">Logo</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down ">
+        <li *ngIf="activeSession"><a routerLink="/admin/get">Usuarios</a></li>
+        <li *ngIf="activeSession"><a routerLink="/encomiendas/get">Encomiendas</a></li>
+        <li *ngIf="activeSession"><a routerLink="/servicios/get">Servicios</a></li>
+        <li *ngIf="activeSession"><a routerLink="/clientes/get">Clientes</a></li>
+  <!-- Sesion -->
+        <li *ngIf="!activeSession"><a routerLink="/seguridad/login">Login</a></li>
+        <li *ngIf="!activeSession"><a routerLink="/admin/create">Registrarme</a></li>
+        <li *ngIf="activeSession"><a routerLink="/seguridad/logout">Cerrar Sesion</a></li>
+      </ul>
+    </div>
+  </nav>
