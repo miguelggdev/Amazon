@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { UsuarioModelo } from '../modelos/usuario.model';
+import { ServicioModelo } from '../modelos/servicio.model';
 import { SeguridadService } from './seguridad.service';
 
 @Injectable({
@@ -10,53 +10,60 @@ import { SeguridadService } from './seguridad.service';
 export class ServicioService {
 
   constructor(private http: HttpClient,
-    private seguridadService: SeguridadService) 
-    {
+    private seguridadService: SeguridadService) {
     this.token = this.seguridadService.getToken();
-       }
-    url = "http://localhost:3000"
-    token: string = ''
-    
-    store(usuario: UsuarioModelo): Observable<UsuarioModelo> {
-      return this.http.post<UsuarioModelo>(`${this.url}/usuarios`, {
-        nombre: usuario.nombre,
-        apellidos: usuario.apellidos,
-        telefono: usuario.telefono,
-        correo: usuario.correo
+  }
+  url = "http://localhost:3000"
+  token: string = ''
+
+  store(servicios: ServicioModelo): Observable<ServicioModelo> {
+    return this.http.post<ServicioModelo>(`${this.url}/servicios`, {
+      fecha: servicios.fecha,
+      hora: servicios.hora,
+      valor: servicios.valor,
+      encomienda: servicios.encomienda,
+      origen: servicios.origen,
+      destino: servicios.destino
+    },
+      {
+        headers: new HttpHeaders({
+          "Authorization": `Bearer ${this.token}`
+        })
       });
     }
-    getAll(): Observable<UsuarioModelo[]>{
-      return this.http.get<UsuarioModelo[]>(`${this.url}/usuarios`, {
+    getAll(): Observable<ServicioModelo[]> {
+      return this.http.get<ServicioModelo[]>(`${this.url}/servicios`, {
         headers: new HttpHeaders({
           "Authorization": `Bearer ${this.token}`
         })
       })
     }
-    update(usuario: UsuarioModelo): Observable<UsuarioModelo> {
-      return this.http.patch<UsuarioModelo>(`${this.url}/usuarios/${usuario.id}`, {
-        nombre: usuario.nombre,
-        apellidos: usuario.apellidos,
-        telefono: usuario.telefono,
-        correo: usuario.correo
+    update(servicios: ServicioModelo): Observable<ServicioModelo> {
+      return this.http.patch<ServicioModelo>(`${this.url}/servicios/${servicios.id}`, {
+        fecha: servicios.fecha,
+        hora: servicios.hora,
+        valor: servicios.valor,
+        encomienda: servicios.encomienda,
+        origen: servicios.origen,
+        destino: servicios.destino
       }, {
         headers: new HttpHeaders({
           "Authorization": `Bearer ${this.token}`
         })
       });
     }
-    delete(id: string): Observable<UsuarioModelo[]>{
-      return this.http.delete<UsuarioModelo[]>(`${this.url}/usuarios/${id}`, {
+    delete(id: string): Observable<ServicioModelo[]> {
+      return this.http.delete<ServicioModelo[]>(`${this.url}/servicios/${id}`, {
         headers: new HttpHeaders({
           "Authorization": `Bearer ${this.token}`
         })
       })
     }
-    getWithId(id: string): Observable<UsuarioModelo>{
-      return this.http.get<UsuarioModelo>(`${this.url}/usuarios/${id}`,{
+    getWithId(id: string): Observable<ServicioModelo> {
+      return this.http.get<ServicioModelo>(`${this.url}/servicios/${id}`, {
         headers: new HttpHeaders({
           "Authorization": `Bearer ${this.token}`
         })
       })
     }
-
-}
+  }
